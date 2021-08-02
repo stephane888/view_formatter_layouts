@@ -1,0 +1,53 @@
+<?php
+
+/**
+ * @file
+ * Contains view_formatter_layouts.module.
+ */
+use Drupal\view_formatter_layouts\ViewFormatterLayouts;
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function view_formatter_layouts_help($route_name, RouteMatchInterface $route_match)
+{
+  switch ($route_name) {
+    // Main module help for the view_formatter_layouts module.
+    case 'help.page.view_formatter_layouts':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('formate la view via les layouts') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function view_formatter_layouts_theme()
+{
+  $hooks = ViewFormatterLayouts::getThemeHooks();
+  $hooks['view_formatter_layouts'] = [
+    'render element' => 'children'
+  ];
+  return $hooks;
+}
+
+/**
+ * Surchager le formulaire d'annonce
+ * implement hook_form_BASE_FORM_ID_alter
+ */
+function view_formatter_layouts_form_node_annonce_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id)
+{
+  // dump($form);
+  if (isset($form['field_chiffre_d_affaires']['widget'][0]['value'])) {
+    $form['field_chiffre_d_affaires']['widget'][0]['value']['#field_suffix'] = '€';
+  }
+  //
+  if (isset($form['field_surface']['widget'][0]['value'])) {
+    $form['field_surface']['widget'][0]['value']['#field_suffix'] = 'm<sup>2</sup>';
+  }
+}

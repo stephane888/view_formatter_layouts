@@ -1,0 +1,47 @@
+{%
+    set classes = [
+    	'cards',
+    	'row'
+    ]
+%}
+<div{{ attributes.addClass(classes) }}>
+  {% for key, layout in rows -%}
+  	<div class="col-md-4 d-flex">
+  		<div class="card">
+        {# Show image #}
+        {% if layout.card_image_field %}
+        	{% for row in layout.card_image_field -%}
+        		{{ row }}
+        	{% endfor %}
+        {% endif %}   
+          <div class="card-body">
+          	<div>
+          		{% if layout.card_title_field %}          	
+                  <h3 class="card-title">
+                  	{% for row in layout.card_title_field -%}
+                		{{ row }}
+                	{% endfor %}
+                  </h3>
+                {% endif %}
+                {% if layout.card_content_field %}
+                	<div class="card-text">
+                		{% for row in layout.card_content_field -%}
+                    		{{ row }}
+                    	{% endfor %}
+                	</div>
+                {% endif %}	
+          	</div>
+            <div>
+            	{% if layout.card_button_field %}
+                	<div class="card-text">
+                		{% for row in layout.card_button_field -%}
+                    		{{ row }}
+                    	{% endfor %}
+                	</div>
+                {% endif %}
+            </div>  
+          </div>
+      </div>
+  	</div>
+  {%- endfor %}
+</div>

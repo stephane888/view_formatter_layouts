@@ -1,0 +1,14 @@
+{{ attach_library('wb_universe/owlcarousel') }}
+
+<section class="comment-lmsg space-padding">
+    <div class="comment-lmsg__container container">
+        <h2 class="title">{{ title }}</h2>
+        <div class="owl-carousel owl-theme " data-owlresponsive='{"items":1,"nav":true,"dots":false,"autoplay":true}'>
+            {% for row in rows %}
+                <div>
+                    {{ row }}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
