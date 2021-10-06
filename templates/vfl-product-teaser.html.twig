@@ -1,0 +1,30 @@
+{% for row in rows %}
+	<div{{attributes}}>
+		<div class="product-teaser">
+			<div{{row.image.attributes}}>
+				{{ row.image.content }}
+			</div>
+			<h4{{row.title.attributes}}>
+				{{ row.title.content }}
+			</h4>
+			<div {{ row.reference.attributes }}>
+				{{ row.reference.content }}
+			</div>
+			<div {{ row.referencef.attributes }}>
+				{{ row.referencef.content }}
+			</div>
+			<div {{ row.description.attributes }}>
+				{{ row.description.content }}
+			</div>
+			<div {{ row.price.attributes }}>
+				{{ row.price.content }}
+			</div>
+			<div {{ row.button.attributes }}>
+				{{ row.button.content }}
+			</div>
+			<div {{ row.stock.attributes }}>
+				{{ row.stock.content }}
+			</div>
+		</div>
+	</div>
+{% endfor %}

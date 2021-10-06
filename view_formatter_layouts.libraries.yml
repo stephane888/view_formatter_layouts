@@ -1,0 +1,18 @@
+#################################################################################################################################################
+## -50 <weight> +50
+
+vfl-product-full:
+  js:
+    layouts/js/vfl-product-full.js: {}
+  css:
+    theme:
+      layouts/css/vfl-product-full.css: { weight: 10 }
+
+###
+vfl-product-teaser:
+  js:
+    layouts/js/vfl-product-teaser.js: {}
+  css:
+    theme:
+      layouts/css/vfl-product-teaser.css: { weight: 10 }
+###

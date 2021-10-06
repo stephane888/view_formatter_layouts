@@ -6,22 +6,22 @@
  */
 use Drupal\view_formatter_layouts\ViewFormatterLayouts;
 use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Template\Attribute;
 
 /**
  * Implements hook_help().
  */
 function view_formatter_layouts_help($route_name, RouteMatchInterface $route_match)
 {
-  switch ($route_name) {
-    // Main module help for the view_formatter_layouts module.
-    case 'help.page.view_formatter_layouts':
-      $output = '';
-      $output .= '<h3>' . t('About') . '</h3>';
-      $output .= '<p>' . t('formate la view via les layouts') . '</p>';
-      return $output;
-
-    default:
-  }
+	switch ($route_name) {
+		// Main module help for the view_formatter_layouts module.
+		case 'help.page.view_formatter_layouts' :
+			$output = '';
+			$output .= '<h3>' . t(' About ') . '</h3>';
+			$output .= '<p>' . t(' formate la view via les layouts ') . '</p>';
+			return $output;
+		default :
+	}
 }
 
 /**
@@ -29,25 +29,19 @@ function view_formatter_layouts_help($route_name, RouteMatchInterface $route_mat
  */
 function view_formatter_layouts_theme()
 {
-  $hooks = ViewFormatterLayouts::getThemeHooks();
-  $hooks['view_formatter_layouts'] = [
-    'render element' => 'children'
-  ];
-  return $hooks;
+	$hooks = ViewFormatterLayouts::getThemeHooks();
+	$hooks['view_formatter_layouts'] = [
+			'render element' => 'children'
+	];
+	return $hooks;
 }
 
 /**
- * Surchager le formulaire d'annonce
- * implement hook_form_BASE_FORM_ID_alter
+ * Implements hook_preprocess_views_view__product_teaser().
  */
-function view_formatter_layouts_form_node_annonce_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id)
+function view_formatter_layouts_preprocess_views_view__product_teaser(&$vars)
 {
-  // dump($form);
-  if (isset($form['field_chiffre_d_affaires']['widget'][0]['value'])) {
-    $form['field_chiffre_d_affaires']['widget'][0]['value']['#field_suffix'] = '€';
-  }
-  //
-  if (isset($form['field_surface']['widget'][0]['value'])) {
-    $form['field_surface']['widget'][0]['value']['#field_suffix'] = 'm<sup>2</sup>';
-  }
+	$vars['attributes']['class'][] = 'row';
 }
+
+

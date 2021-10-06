@@ -1,0 +1,41 @@
+{% for row in rows %}
+	<div{{attributes}}>
+		<div class="vfl-product-full">
+			<div{{row.images.attributes.addClass('col-md-6')}}>
+				{{ row.images.content }}
+			</div>
+			<div class="col-md-6">
+				<h1{{row.title.attributes}}>
+					{{ row.title.content }}
+				</h1>
+				<div {{ row.price.attributes }}>
+					{{ row.price.content }}
+				</div>
+				<div {{ row.button.attributes }}>
+					{{ row.button.content }}
+				</div>
+				<div {{ row.reference.attributes }}>
+					{{ row.reference.content }}
+				</div>
+				<div {{ row.referencef.attributes }}>
+					{{ row.referencef.content }}
+				</div>
+				<div {{ row.marque.attributes }}>
+					{{ row.marque.content }}
+				</div>
+				<div {{ row.label.attributes }}>
+					{{ row.label.content }}
+				</div>
+				<div {{ row.delais_livraison.attributes }}>
+					{{ row.delais_livraison.content }}
+				</div>
+				<div {{ row.categorie.attributes }}>
+					{{ row.categorie.content }}
+				</div>
+				<div {{ row.custom_text.attributes }}>
+					{{ row.custom_text.content }}
+				</div>
+			</div>
+		</div>
+	</div>
+{% endfor %}

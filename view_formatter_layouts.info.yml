@@ -2,6 +2,7 @@ name: 'view formatter layouts'
 type: module
 description: 'formate la view via les layouts'
 core: 8.x
+core_version_requirement: ^8 || ^9
 package: 'wb-universe'
 dependencies:
   - views
