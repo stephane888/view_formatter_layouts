@@ -111,7 +111,7 @@ class RenderViewExecutable
 	 */
 	function GetField__FURTUR($field)
 	{
-		// dump($field->render_item(0, $item));
+		
 		$f = [];
 		if (! empty($field->options['label'])) {
 			$f[] = [
