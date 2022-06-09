@@ -4,8 +4,8 @@ namespace Drupal\view_formatter_layouts\Plugin\views\style;
 
 use Drupal\core\form\FormStateInterface;
 use Drupal\views\Plugin\views\style\StylePluginBase;
-use Drupal\view_formatter_layouts\ViewFormatterLayouts;
-use Drupal\Component\Plugin\PluginBase;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\layoutgenentitystyles\Services\LayoutgenentitystylesServices;
 
 /**
  * Style plugin to render a list of years and months
@@ -28,5 +28,54 @@ class GridSystem extends StylePluginBase {
    * @var bool
    */
   protected $usesRowPlugin = TRUE;
+  
+  /**
+   *
+   * @var LayoutgenentitystylesServices
+   */
+  protected $LayoutgenentitystylesServices;
+  
+  /**
+   *
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+    $instance = parent::create($container, $configuration, $plugin_id, $plugin_definition);
+    $instance->LayoutgenentitystylesServices = $container->get('layoutgenentitystyles.add.style.theme');
+    return $instance;
+  }
+  
+  /**
+   * Set default options.
+   */
+  protected function defineOptions() {
+    $options = parent::defineOptions();
+    $options['layoutgenentitystyles_view'] = [
+      'default' => 'view_formatter_layouts/vlf-grid'
+    ];
+    return $options;
+  }
+  
+  public function submitOptionsForm(&$form, FormStateInterface $form_state) {
+    parent::submitOptionsForm($form, $form_state);
+    // On recupere la valeur de la librairie et on ajoute:
+    $library = $this->options['layoutgenentitystyles_view'];
+    if (!empty($library)) {
+      $this->LayoutgenentitystylesServices->addStyleFromView($library, $this->view->id(), $this->view->current_display);
+    }
+  }
+  
+  public function buildOptionsForm(&$form, FormStateInterface $form_state) {
+    parent::buildOptionsForm($form, $form_state);
+    $form['layoutgenentitystyles_view'] = [
+      '#type' => 'select',
+      '#title' => $this->t(' Custom theme '),
+      '#options' => [
+        'view_formatter_layouts/vlf-grid' => 'Default Grid'
+      ],
+      '#default_value' => $this->options['layoutgenentitystyles_view'],
+      '#empty_option' => '- Select -'
+    ];
+  }
   
 }
